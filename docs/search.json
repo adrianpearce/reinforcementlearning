@@ -1,0 +1,562 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Reinforcement Learning",
+    "section": "",
+    "text": "These are the reinforcement learning notes from the COMP90054 AI for Autonomy subject within the School of Computing and Information Systems at The University of Melbourne.\nThe notes contain material adapted from David Silver’s Reinforcement Learning Slides, licensed under CC BY-NC 4.0",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html",
+    "href": "rl.html",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "",
+    "text": "Topics\nFirst thread: prediction & planning:\nSecond thread: model-free control:\nThird thread: approximation:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#topics",
+    "href": "rl.html#topics",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "",
+    "text": "Monte Carlo (MC) prediction (episodic evaluation).\nTemporal Difference (TD) prediction (bootstrapping).\nMonte Carlo Tree Search (MCTS) (planning with a model).\nUCT (exploration vs exploitation inside search).\n\n\n\nMC control (prediction + policy improvement loop).\nTD control → Q-learning, SARSA.\n\n\n\n\nValue function approximation (linear → deep).\nPolicy approximation (policy gradients).\nActor–critic (integration of both).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#textbook",
+    "href": "rl.html#textbook",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Textbook",
+    "text": "Textbook\nReinforcement Learning, An Introduction, Second Edition Sutton and Barto, MIT Press, 2020\n\nAvailable free at : http://www.incompleteideas.net/book/RLbook2020.pdf",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#learning-and-planning",
+    "href": "rl.html#learning-and-planning",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Learning and Planning",
+    "text": "Learning and Planning\nTwo fundamental problems in sequential decision making\nPlanning (first half of the subject):\n\nA model of the environment is known\nThe agent performs computations with its model (without any external interaction)\nThe agent improves its policy through search, deliberation, reasoning, and introspection\n\n\nReinforcement Learning (this half of the subject):\n\nThe environment is initially unknown\nThe agent interacts with the environment\nThe agent improves its policy",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#atari-example-reinforcement-learning",
+    "href": "rl.html#atari-example-reinforcement-learning",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Atari Example: Reinforcement Learning",
+    "text": "Atari Example: Reinforcement Learning\n\n\n\n\n\n\n\n\n\nRules of the game are unknown\nLearn directly from interactive game-play\nPick actions on joystick, only see pixels and scores (observations)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#atari-example-planning",
+    "href": "rl.html#atari-example-planning",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Atari Example: Planning",
+    "text": "Atari Example: Planning\n\n\nRules of the game are known\nCan query emulator\n\nperfect model inside agent’s brain\n\nIf I take action \\(a\\) from state \\(s\\):\n\nwhat would the next state \\(s'\\) be?\nwhat would the score be?\n\nPlan ahead to find optimal policy, e.g. tree search",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#characteristics-of-reinforcement-learning",
+    "href": "rl.html#characteristics-of-reinforcement-learning",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Characteristics of Reinforcement Learning",
+    "text": "Characteristics of Reinforcement Learning\nWhat makes reinforecement learning different from automated planning?\n\nThe outcomes of actions are non-deterministic\nUses probabilistic representation\n\n\nWhat makes reinforcement learning different from other machine learning paradigms?\n\nSequence matters, i.e. it involves non-i.i.d. (independent and identically distributed) data\nThere is no supervisor, only a reward signal\nFeedback is delayed, not instantaneous",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#examples-of-reinforcement-learning",
+    "href": "rl.html#examples-of-reinforcement-learning",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Examples of Reinforcement Learning",
+    "text": "Examples of Reinforcement Learning\n\nMake a humanoid robot walk\nTrain an LLM using human feedback\nControl a power station\nOptimise operating system routines\nManage an inverstment portfolio\nControl inventory in a warehouse",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#example-make-a-humanoid-robot-walk",
+    "href": "rl.html#example-make-a-humanoid-robot-walk",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Example: Make a humanoid robot walk",
+    "text": "Example: Make a humanoid robot walk\n\nAtlas demonstrates policies using RL based on human motion capture and animation-Boston Dynamics ’25",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#example-train-an-llm-using-human-feedback",
+    "href": "rl.html#example-train-an-llm-using-human-feedback",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Example: Train an LLM using human feedback",
+    "text": "Example: Train an LLM using human feedback\n\nProximal policy update (PPO) is used in training pipeline of ChatGPT. Group relative policy optimisation (GRPO) is used in DeepSeek (Ari Seff, watch from 7:22).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#example-control-a-power-station",
+    "href": "rl.html#example-control-a-power-station",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Example: Control a power station",
+    "text": "Example: Control a power station",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#example-optimising-operating-system-routines",
+    "href": "rl.html#example-optimising-operating-system-routines",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Example: Optimising operating system routines",
+    "text": "Example: Optimising operating system routines\n2023, Daniel J. Mankowitz, et al. Faster sorting algorithms discovered using deep reinforcement learning, Nature, Vol 618, pp. 257-273\nDeepMind’s AlphaDev, a deep reinforcement learning agent, has discovered faster sorting algorithms, outperforming previously known human benchmarks.\n\nThese algorithms have been integrated into the LLVM standard C++ sort library.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#example-control-inventory-in-a-warehouse",
+    "href": "rl.html#example-control-inventory-in-a-warehouse",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Example: Control inventory in a warehouse",
+    "text": "Example: Control inventory in a warehouse\nRespond to the demand for different products stocked in a warehouse over time.\nGoals:\n\nOrder the necessary goods to meet demand\nAvoid running out of stock (stock-outs)\nRespond to seasonal demand\nDynamically respond to changing trends and fashions",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#rewards-1",
+    "href": "rl.html#rewards-1",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Rewards",
+    "text": "Rewards\n\nA reward \\(R_t\\) is a scalar feedback signal.\nIndicates how well agent is doing at step \\(t\\)\nThe agent’s job is to maximise cumulative reward\n\nReinforcement learning is based on the reward hypothesis\nDefinition (Reward Hypothesis):\nAll goals can be described by the maximisation of expected cumulative reward.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#example-of-rewards",
+    "href": "rl.html#example-of-rewards",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Example of Rewards",
+    "text": "Example of Rewards\n\nMake a humanoid robot walk\n\n-ve reward for falling\n+ve reward for forward motion\n\nOptimise operating system routines\n\n-ve reward for execution time\n+ve reward for throughput\n\n\n\n\nControl a power station\n\n+ve reward for containment of plasma\n-ve reward for plasma crashing\n\nControl inventory in a warehouses\n\n-ve reward for stock-out penalty (lost sales)\n-ve reward for holding costs (inventory)\n+ve reward for sales revenue",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#sequential-decision-making-1",
+    "href": "rl.html#sequential-decision-making-1",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Sequential Decision Making",
+    "text": "Sequential Decision Making\nGoal: select actions to maximise total future reward\n\nActions may have long term consequences\nReward may be delayed\nIt may be better to sacrifice immediate reward to gain more long-term reward\n\nExamples:\n\nA financial investment (may take months to mature)\nRe-stocking warehouse (might prevent a stock-outs in days or weeks)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#agent",
+    "href": "rl.html#agent",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Agent",
+    "text": "Agent",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#agent-and-environment",
+    "href": "rl.html#agent-and-environment",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Agent and Environment",
+    "text": "Agent and Environment\n\n\n\n\n\n\n\n\nAt each step \\(t\\) the agent:\n\nExecutes action \\(A_t\\)\nReceives observation \\(O_t\\)\nReceives scalar reward \\(R_t\\)\n\nThe environment:\nReceives action \\(A_t\\)\n\nEmits observation \\(O_{t+1}\\)\nEmits scalar reward \\(R_{t+1}\\)\n\\(t\\) increments at env. step",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#history-and-state",
+    "href": "rl.html#history-and-state",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "History and State",
+    "text": "History and State\nThe history is sequence of observations, actions, rewards\n\\[\nH_t = O_1,R_1,A_1, \\ldots A_{t-1}, O_t, R_t\n\\] - i.e. the stream of a robot’s actions, observations and rewards up to time \\(t\\)\nWhat happens next depends on the history:\n\nThe agent selects actions, and\nthe environment selects observations/rewards.\n\nState is the information used to determine what happens next.\nFormally, a state is a function of the history: \\(S_t = f(H_t )\\)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#environment-state",
+    "href": "rl.html#environment-state",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Environment State",
+    "text": "Environment State\n\n\n\n\n\n\n\n\nThe environment state \\(S^e_t\\) is the environment’s private representation\n\ni.e. data environment uses to pick the next observation/reward\n\nThe environment state is not usually visible to the agent\n\nEven if \\(S^e_t\\) is visible, it may contain irrelevant info",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#agent-state",
+    "href": "rl.html#agent-state",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Agent State",
+    "text": "Agent State\n\n\n\n\n\n\n\n\nThe agent state \\(S^a_t\\) is the agent’s internal representation\n\ni.e. information the agent uses to pick the next action\ni.e. information used by reinforcement learning algorithms\n\nIt can be any function of history: \\(S^a_t = f(H_t)\\)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#information-state",
+    "href": "rl.html#information-state",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Information State",
+    "text": "Information State\nAn information state (a.k.a. Markov state) contains all useful information from the history.\nDefinition: A state \\(S_t\\) is Markov if and only if \\[\n\\mathbb{P} [S_{t+1} | St ] = \\mathbb{P} [S_{t+1} | S_1, \\ldots, S_t ]\n\\] “The future is independent of the past given the present” \\[\nH_{1:t} \\rightarrow St \\rightarrow H_{t+1:\\infty}\n\\]\n\nOnce the state is known, the history may be thrown away\n\ni.e. The state is a sufficient statistic of the future\nThe environment state \\(S^e_t\\) is Markov\nThe history \\(H_t\\) is Markov",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#rat-example",
+    "href": "rl.html#rat-example",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Rat Example",
+    "text": "Rat Example\n\n\n\n\n\n\n\nWhat if agent state = last \\(3\\) items in sequence?\nWhat if agent state = counts for lights, bells and levers?\nWhat if agent state = complete sequence?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#components-of-an-rl-agent-1",
+    "href": "rl.html#components-of-an-rl-agent-1",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Components of an RL Agent",
+    "text": "Components of an RL Agent\nAn RL agent may include one or more of these components:\n\nPolicy: agent’s behaviour function\nValue function: how good is each state and/or action\nModel: agent’s representation of the environment",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#policy",
+    "href": "rl.html#policy",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Policy",
+    "text": "Policy\nA policy is the agent’s behaviour\nIt is a map from state to action, e.g.\n\nDeterministic policy: \\(a = \\pi(s)\\)\nStochastic policy: \\(\\pi(a|s) = \\mathbb{P}[A_t = a|S_t = s]\\)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#value-function",
+    "href": "rl.html#value-function",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Value Function",
+    "text": "Value Function\nValue function is a prediction of future reward\n\nUsed to evaluate the goodness/badness of states,\nand therefore to select between actions, e.g.\n\n\\[\nv_{\\pi}(s) = \\mathbb{E}[R_{t+1} + \\gamma R_{t+2} + \\gamma^2 R_{t+3} + \\ldots | S_t = s]\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#model",
+    "href": "rl.html#model",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Model",
+    "text": "Model\nA model predicts what the environment will do next\n\\(\\mathcal{P}\\) predicts the next state\n\\(\\mathcal{R}\\) predicts the next (immediate) reward, e.g.\n\\[\nP^a_{ss'} = \\mathbb{P}[S_{t+1} = s' | S_t = s, A_t = a]\n\\]\n\\[\nR^a_s = \\mathbb{E}[R_{t+1} | S_t = s, A_t = a]\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#maze-example",
+    "href": "rl.html#maze-example",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Maze Example",
+    "text": "Maze Example\n\n\n\n\n\n\n\n\n\nRewards: -1 per time-step\nActions: N, E, S, W\nStates: Agent’s location",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#maze-example-policy",
+    "href": "rl.html#maze-example-policy",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Maze Example: Policy",
+    "text": "Maze Example: Policy\n\n\n\n\n\n\nArrows represent policy \\(\\pi(s)\\) for each state \\(s\\)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#maze-example-value-function",
+    "href": "rl.html#maze-example-value-function",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Maze Example: Value Function",
+    "text": "Maze Example: Value Function\n\n\n\n\n\n\nNumbers represent value \\(v_{\\pi}(s)\\) of each state \\(s\\)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#maze-example-model",
+    "href": "rl.html#maze-example-model",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Maze Example: Model",
+    "text": "Maze Example: Model\n\n\n\n\n\n\n\n\nAgent may have an internal model of the environment\n\nDynamics: how actions change the state\nRewards: how much reward from each state\nThe model may be imperfect\n\n\n\nGrid layout represents transition model \\(\\mathcal{P}^a_{ss'}\\)\nNumbers represent immediate reward \\(\\mathcal{R}^a_s\\) from each state \\(s\\) (same for all \\(a\\))",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#categorizing-rl-agents-1",
+    "href": "rl.html#categorizing-rl-agents-1",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Categorizing RL agents",
+    "text": "Categorizing RL agents\nValue Based\n\nNo Policy (Implicit)\nValue Function\n\nPolicy Based\n\nPolicy\nNo Value Function\n\nActor Critic\n\nPolicy\nValue Function\n\n\nModel Free\n\nPolicy and/or Value Function\nNo Model\n\nModel Based\n\nPolicy and/or Value Function\nModel",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#taxonomy",
+    "href": "rl.html#taxonomy",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Taxonomy",
+    "text": "Taxonomy",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#exploration-and-exploitation",
+    "href": "rl.html#exploration-and-exploitation",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Exploration and Exploitation",
+    "text": "Exploration and Exploitation\n\nReinforcement learning is like trial-and-error learning\nThe agent should discover a good policy\nFrom its experiences of the environment\nWithout losing too much reward along the way\n\n\n\nExploration finds more information about the environment\nExploitation exploits known information to maximise reward\nIt is usually important to explore as well as exploit",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#examples",
+    "href": "rl.html#examples",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Examples",
+    "text": "Examples\n\nRestaurant Selection Exploitation Go to your favourite restaurant Exploration Try a new restaurant\nOnline Banner Advertisements Exploitation Show the most successful advert Exploration Show a different advert\nGold exploration Exploitation Drill at the best known location Exploration Drill at a new location\nGame Playing Exploitation Play the move you believe is best Exploration Play an experimental move",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "rl.html#prediction-and-control",
+    "href": "rl.html#prediction-and-control",
+    "title": "Introduction to Reinforcement Learning",
+    "section": "Prediction and Control",
+    "text": "Prediction and Control\nPrediction: evaluate the future\n\nGiven a best policy\n\nControl: optimise the future\n\nfind the best policy\n\nWe need to solve the prediction problem in order to solve the control problem\n\ni.e. we need evaluate all of our polcies in order to work out which is the best one",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Reinforcement Learning</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html",
+    "href": "mdp.html",
+    "title": "Introduction to MDPs",
+    "section": "",
+    "text": "Markov Property\nMarkov decision processes formally describe an environment for reinforcement learning\nWhere the environment is fully observable -i.e. The current state completely characterises the process\nAlmost all RL problems can be formalised as MDPs, e.g.\n“The future is independent of the past given the present”\nDefinition:\nA state \\(S_t\\) is Markov if and only if \\[\n\\mathbb{P} [S_{t+1} | St ] = \\mathbb{P} [S_{t+1}\\ |\\ S_1, \\ldots, S_t ]\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-student-markov-chain",
+    "href": "mdp.html#example-student-markov-chain",
+    "title": "Introduction to MDPs",
+    "section": "Example: Student Markov Chain",
+    "text": "Example: Student Markov Chain",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-student-markov-chain-episodes",
+    "href": "mdp.html#example-student-markov-chain-episodes",
+    "title": "Introduction to MDPs",
+    "section": "Example: Student Markov Chain Episodes",
+    "text": "Example: Student Markov Chain Episodes\n\n\n\n\n\n\n\n\nSample episodes for Student Markov Chain (starting from \\(S_1 = C1\\)): \\(S_1; S_2; \\ldots, S_T\\)\n\nC1 C2 C3 Pass Sleep\nC1 In In C1 C2 Sleep\nC1 C2 C3 Bar C2 C3 Pass Sleep\nC1 In In C1 C2 C3 Bar C1 In In In C1 C2 C3 Bar C2 Sleep",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-student-markov-chain-transition-matrix",
+    "href": "mdp.html#example-student-markov-chain-transition-matrix",
+    "title": "Introduction to MDPs",
+    "section": "Example: Student Markov Chain Transition Matrix",
+    "text": "Example: Student Markov Chain Transition Matrix\n\n\n\n\n\n\n\n\n\\[\n\\tiny\n\\mathcal{P} =\n\\begin{bmatrix}\n& \\textit{C1} & \\textit{C2} & \\textit{C3} & \\textit{Pass} & \\textit{Bar} & \\textit{In} & \\textit{Sleep} \\\\\n\\textit{C1}    &      & 0.5  &      &       &       & 0.5   &      \\\\\n\\textit{C2}    &      & 0.8  &      &       &       &       & 0.2   \\\\\n\\textit{C3}    &      &      &      & 0.6   & 0.4   &       &       \\\\\n\\textit{Pass}  &      &      &      &       &       &       & 1.0   \\\\\n\\textit{Bar}   & 0.2  & 0.4  & 0.4  &       &       &       &       \\\\\n\\textit{In}    & 0.1  &      &      &       &       & 0.9   &       \\\\\n\\textit{Sleep} &      &      &      &       &       &       & 1\n\\end{bmatrix}\n\\normalsize\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-student-mrp",
+    "href": "mdp.html#example-student-mrp",
+    "title": "Introduction to MDPs",
+    "section": "Example: Student MRP",
+    "text": "Example: Student MRP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#return",
+    "href": "mdp.html#return",
+    "title": "Introduction to MDPs",
+    "section": "Return",
+    "text": "Return\nDefinition The return \\(G_t\\) is the total discounted reward from time-step \\(t\\). \\[\nG_t \\;=\\; R_{t+1} \\;+\\; \\gamma R_{t+2} \\;+\\; \\dots \\;=\\; \\sum_{k=0}^{\\infty} \\gamma^k R_{t+k+1}\n\\]\n\n\\[\nG_t \\;=\\; R_{t+1} \\;+\\; \\gamma R_{t+2} \\;+\\; \\dots \\;=\\; \\sum_{k=0}^{\\infty} \\gamma^k R_{t+k+1}\n\\]\n\nThe discount \\(\\gamma \\in [0, 1]\\) is the present value of future rewards\nThe value of receiving reward \\(R\\) after \\(k+1\\) time-steps is \\(\\gamma^k R\\).\nThis values immediate reward above delayed reward\n\n\\(\\gamma\\) close to \\(0\\) leads to “myopic” evaluation\n\\(\\gamma\\) close to \\(1\\) leads to “far-sighted” evaluation",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#why-discount",
+    "href": "mdp.html#why-discount",
+    "title": "Introduction to MDPs",
+    "section": "Why discount?",
+    "text": "Why discount?\nMost Markov reward/decision processes are discounted, why?\n\nMathematically convenient to discount rewards\nAvoids infinite returns in cyclic Markov processes\nUncertainty about the future may not be fully represented\nIf the reward is financial, immediate rewards may earn more interest than delayed rewards\nAnimal/human behaviour shows preference for immediate reward\n\n\nMost Markov reward/decision processes are discounted, why?\n\nIt is sometimes possible to use undiscounted Markov reward processes (i.e. \\(\\gamma = 1\\)), e.g. if all sequences terminate.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#value-function",
+    "href": "mdp.html#value-function",
+    "title": "Introduction to MDPs",
+    "section": "Value Function",
+    "text": "Value Function\nThe value function \\(v(s)\\) gives the long-term value of state s\nDefinition\nThe state value function \\(v(s)\\) of an MRP is the expected return starting from state \\(s\\)\n\\[\nv(s) = \\mathbb{E}[G_t\\ |\\ S_t = s]\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-state-value-function-for-student-mrp-1",
+    "href": "mdp.html#example-state-value-function-for-student-mrp-1",
+    "title": "Introduction to MDPs",
+    "section": "Example: State-Value Function for Student MRP (1)",
+    "text": "Example: State-Value Function for Student MRP (1)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-state-value-function-for-student-mrp-2",
+    "href": "mdp.html#example-state-value-function-for-student-mrp-2",
+    "title": "Introduction to MDPs",
+    "section": "Example: State-Value Function for Student MRP (2)",
+    "text": "Example: State-Value Function for Student MRP (2)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-state-value-function-for-student-mrp-3",
+    "href": "mdp.html#example-state-value-function-for-student-mrp-3",
+    "title": "Introduction to MDPs",
+    "section": "Example: State-Value Function for Student MRP (3)",
+    "text": "Example: State-Value Function for Student MRP (3)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-bellman-equation-for-student-mrp",
+    "href": "mdp.html#example-bellman-equation-for-student-mrp",
+    "title": "Introduction to MDPs",
+    "section": "Example: Bellman Equation for Student MRP",
+    "text": "Example: Bellman Equation for Student MRP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-student-mdp",
+    "href": "mdp.html#example-student-mdp",
+    "title": "Introduction to MDPs",
+    "section": "Example: Student MDP",
+    "text": "Example: Student MDP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-state-value-function-for-student-mdp",
+    "href": "mdp.html#example-state-value-function-for-student-mdp",
+    "title": "Introduction to MDPs",
+    "section": "Example: State-Value Function for Student MDP",
+    "text": "Example: State-Value Function for Student MDP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-bellman-expectation-equation-in-student-mdp",
+    "href": "mdp.html#example-bellman-expectation-equation-in-student-mdp",
+    "title": "Introduction to MDPs",
+    "section": "Example: Bellman Expectation Equation in Student MDP",
+    "text": "Example: Bellman Expectation Equation in Student MDP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-optimal-value-function-for-student-mdp",
+    "href": "mdp.html#example-optimal-value-function-for-student-mdp",
+    "title": "Introduction to MDPs",
+    "section": "Example: Optimal Value Function for Student MDP",
+    "text": "Example: Optimal Value Function for Student MDP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-optimal-action-value-function-for-student-mdp",
+    "href": "mdp.html#example-optimal-action-value-function-for-student-mdp",
+    "title": "Introduction to MDPs",
+    "section": "Example: Optimal Action-Value Function for Student MDP",
+    "text": "Example: Optimal Action-Value Function for Student MDP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-optimal-policy-for-student-mdp",
+    "href": "mdp.html#example-optimal-policy-for-student-mdp",
+    "title": "Introduction to MDPs",
+    "section": "Example: Optimal Policy for Student MDP",
+    "text": "Example: Optimal Policy for Student MDP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  },
+  {
+    "objectID": "mdp.html#example-bellman-optimality-equation-in-student-mdp",
+    "href": "mdp.html#example-bellman-optimality-equation-in-student-mdp",
+    "title": "Introduction to MDPs",
+    "section": "Example: Bellman Optimality Equation in Student MDP",
+    "text": "Example: Bellman Optimality Equation in Student MDP",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to MDPs</span>"
+    ]
+  }
+]

@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Reinforcement Learning – Reinforcement Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./mdp.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rl.html"><span class="chapter-title">Introduction to Reinforcement Learning</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Reinforcement Learning</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rl.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Introduction to Reinforcement Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mdp.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to MDPs</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#topics" id="toc-topics" class="nav-link active" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#textbook" id="toc-textbook" class="nav-link" data-scroll-target="#textbook">Textbook</a></li>
+  <li><a href="#learning-and-planning" id="toc-learning-and-planning" class="nav-link" data-scroll-target="#learning-and-planning">Learning and Planning</a></li>
+  <li><a href="#atari-example-reinforcement-learning" id="toc-atari-example-reinforcement-learning" class="nav-link" data-scroll-target="#atari-example-reinforcement-learning">Atari Example: Reinforcement Learning</a></li>
+  <li><a href="#atari-example-planning" id="toc-atari-example-planning" class="nav-link" data-scroll-target="#atari-example-planning">Atari Example: Planning</a></li>
+  <li><a href="#characteristics-of-reinforcement-learning" id="toc-characteristics-of-reinforcement-learning" class="nav-link" data-scroll-target="#characteristics-of-reinforcement-learning">Characteristics of Reinforcement Learning</a></li>
+  <li><a href="#examples-of-reinforcement-learning" id="toc-examples-of-reinforcement-learning" class="nav-link" data-scroll-target="#examples-of-reinforcement-learning">Examples of Reinforcement Learning</a></li>
+  <li><a href="#example-make-a-humanoid-robot-walk" id="toc-example-make-a-humanoid-robot-walk" class="nav-link" data-scroll-target="#example-make-a-humanoid-robot-walk">Example: Make a humanoid robot walk</a></li>
+  <li><a href="#example-train-an-llm-using-human-feedback" id="toc-example-train-an-llm-using-human-feedback" class="nav-link" data-scroll-target="#example-train-an-llm-using-human-feedback">Example: Train an LLM using human feedback</a></li>
+  <li><a href="#example-control-a-power-station" id="toc-example-control-a-power-station" class="nav-link" data-scroll-target="#example-control-a-power-station">Example: Control a power station</a></li>
+  <li><a href="#example-optimising-operating-system-routines" id="toc-example-optimising-operating-system-routines" class="nav-link" data-scroll-target="#example-optimising-operating-system-routines">Example: Optimising operating system routines</a></li>
+  <li><a href="#example-control-inventory-in-a-warehouse" id="toc-example-control-inventory-in-a-warehouse" class="nav-link" data-scroll-target="#example-control-inventory-in-a-warehouse">Example: Control inventory in a warehouse</a></li>
+  <li><a href="#rewards" id="toc-rewards" class="nav-link" data-scroll-target="#rewards">Rewards</a>
+  <ul class="collapse">
+  <li><a href="#rewards-1" id="toc-rewards-1" class="nav-link" data-scroll-target="#rewards-1">Rewards</a></li>
+  <li><a href="#example-of-rewards" id="toc-example-of-rewards" class="nav-link" data-scroll-target="#example-of-rewards">Example of Rewards</a></li>
+  </ul></li>
+  <li><a href="#sequential-decision-making" id="toc-sequential-decision-making" class="nav-link" data-scroll-target="#sequential-decision-making">Sequential Decision Making</a>
+  <ul class="collapse">
+  <li><a href="#sequential-decision-making-1" id="toc-sequential-decision-making-1" class="nav-link" data-scroll-target="#sequential-decision-making-1">Sequential Decision Making</a></li>
+  <li><a href="#agent" id="toc-agent" class="nav-link" data-scroll-target="#agent">Agent</a></li>
+  <li><a href="#agent-and-environment" id="toc-agent-and-environment" class="nav-link" data-scroll-target="#agent-and-environment">Agent and Environment</a></li>
+  <li><a href="#history-and-state" id="toc-history-and-state" class="nav-link" data-scroll-target="#history-and-state">History and State</a></li>
+  <li><a href="#environment-state" id="toc-environment-state" class="nav-link" data-scroll-target="#environment-state">Environment State</a></li>
+  <li><a href="#agent-state" id="toc-agent-state" class="nav-link" data-scroll-target="#agent-state">Agent State</a></li>
+  <li><a href="#information-state" id="toc-information-state" class="nav-link" data-scroll-target="#information-state">Information State</a></li>
+  <li><a href="#rat-example" id="toc-rat-example" class="nav-link" data-scroll-target="#rat-example">Rat Example</a></li>
+  </ul></li>
+  <li><a href="#components-of-an-rl-agent" id="toc-components-of-an-rl-agent" class="nav-link" data-scroll-target="#components-of-an-rl-agent">Components of an RL Agent</a>
+  <ul class="collapse">
+  <li><a href="#components-of-an-rl-agent-1" id="toc-components-of-an-rl-agent-1" class="nav-link" data-scroll-target="#components-of-an-rl-agent-1">Components of an RL Agent</a></li>
+  <li><a href="#policy" id="toc-policy" class="nav-link" data-scroll-target="#policy">Policy</a></li>
+  <li><a href="#value-function" id="toc-value-function" class="nav-link" data-scroll-target="#value-function">Value Function</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
+  <li><a href="#maze-example" id="toc-maze-example" class="nav-link" data-scroll-target="#maze-example">Maze Example</a></li>
+  <li><a href="#maze-example-policy" id="toc-maze-example-policy" class="nav-link" data-scroll-target="#maze-example-policy">Maze Example: Policy</a></li>
+  <li><a href="#maze-example-value-function" id="toc-maze-example-value-function" class="nav-link" data-scroll-target="#maze-example-value-function">Maze Example: Value Function</a></li>
+  <li><a href="#maze-example-model" id="toc-maze-example-model" class="nav-link" data-scroll-target="#maze-example-model">Maze Example: Model</a></li>
+  </ul></li>
+  <li><a href="#categorizing-rl-agents" id="toc-categorizing-rl-agents" class="nav-link" data-scroll-target="#categorizing-rl-agents">Categorizing RL agents</a>
+  <ul class="collapse">
+  <li><a href="#categorizing-rl-agents-1" id="toc-categorizing-rl-agents-1" class="nav-link" data-scroll-target="#categorizing-rl-agents-1">Categorizing RL agents</a></li>
+  <li><a href="#taxonomy" id="toc-taxonomy" class="nav-link" data-scroll-target="#taxonomy">Taxonomy</a></li>
+  <li><a href="#exploration-and-exploitation" id="toc-exploration-and-exploitation" class="nav-link" data-scroll-target="#exploration-and-exploitation">Exploration and Exploitation</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#prediction-and-control" id="toc-prediction-and-control" class="nav-link" data-scroll-target="#prediction-and-control">Prediction and Control</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Introduction to Reinforcement Learning</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="topics" class="level2">
+<h2 class="anchored" data-anchor-id="topics">Topics</h2>
+<p>First thread: <span style="color:blue">prediction &amp; planning</span>:</p>
+<ul>
+<li>Monte Carlo (MC) prediction (episodic evaluation).</li>
+<li>Temporal Difference (TD) prediction (bootstrapping).</li>
+<li>Monte Carlo Tree Search (MCTS) (planning with a model).</li>
+<li>UCT (exploration vs exploitation inside search).</li>
+</ul>
+<p>Second thread: <span style="color:blue">model-free control</span>:</p>
+<ul>
+<li>MC control (prediction + policy improvement loop).</li>
+<li>TD control → Q-learning, SARSA.</li>
+</ul>
+<hr>
+<p>Third thread: <span style="color:blue">approximation</span>:</p>
+<ul>
+<li>Value function approximation (linear → deep).</li>
+<li>Policy approximation (policy gradients).</li>
+<li>Actor–critic (integration of both).</li>
+</ul>
+</section>
+<section id="textbook" class="level2">
+<h2 class="anchored" data-anchor-id="textbook">Textbook</h2>
+<p>Reinforcement Learning, An Introduction, Second Edition Sutton and Barto, MIT Press, 2020</p>
+<ul>
+<li>Available free at : <a href="http://www.incompleteideas.net/book/RLbook2020.pdf">http://www.incompleteideas.net/book/RLbook2020.pdf</a><br></li>
+</ul>
+</section>
+<section id="learning-and-planning" class="level2">
+<h2 class="anchored" data-anchor-id="learning-and-planning">Learning and Planning</h2>
+<p>Two fundamental problems in sequential decision making</p>
+<p>Planning (<span style="color:blue">first half of the subject</span>):</p>
+<ul>
+<li><p>A model of the environment is known</p></li>
+<li><p>The agent performs computations with its model (without any external interaction)</p></li>
+<li><p>The agent improves its policy through search, deliberation, reasoning, and introspection</p></li>
+</ul>
+<hr>
+<p>Reinforcement Learning (<span style="color:blue">this half of the subject</span>):</p>
+<ul>
+<li><p>The environment is initially unknown</p></li>
+<li><p>The agent interacts with the environment</p></li>
+<li><p>The agent improves its policy</p></li>
+</ul>
+</section>
+<section id="atari-example-reinforcement-learning" class="level2">
+<h2 class="anchored" data-anchor-id="atari-example-reinforcement-learning">Atari Example: Reinforcement Learning</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/atari_b.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<ul>
+<li><p>Rules of the game are <span style="color:blue"><em>unknown</em></span></p></li>
+<li><p>Learn directly from interactive game-play</p></li>
+<li><p>Pick actions on joystick, only see pixels and scores (observations)</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="atari-example-planning" class="level2">
+<h2 class="anchored" data-anchor-id="atari-example-planning">Atari Example: Planning</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Rules of the game are <span style="color:blue"><em>known</em></span></p>
+<p>Can query emulator</p>
+<ul>
+<li>perfect model inside agent’s brain</li>
+</ul>
+<p>If I take action <span class="math inline">\(a\)</span> from state <span class="math inline">\(s\)</span>:<br></p>
+<ul>
+<li><p>what would the next state <span class="math inline">\(s'\)</span> be?</p></li>
+<li><p>what would the score be?</p></li>
+</ul>
+<p>Plan ahead to find optimal policy, e.g.&nbsp;tree search</p>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/atari_search_b.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="characteristics-of-reinforcement-learning" class="level2">
+<h2 class="anchored" data-anchor-id="characteristics-of-reinforcement-learning">Characteristics of Reinforcement Learning</h2>
+<p>What makes reinforecement learning different from automated planning?</p>
+<ul>
+<li>The outcomes of actions are non-deterministic</li>
+<li>Uses probabilistic representation</li>
+</ul>
+<hr>
+<p>What makes reinforcement learning different from other machine learning paradigms?</p>
+<ul>
+<li>Sequence matters, i.e.&nbsp;it involves non-i.i.d. (independent and identically distributed) data</li>
+<li>There is no supervisor, only a reward signal</li>
+<li>Feedback is delayed, not instantaneous</li>
+</ul>
+</section>
+<section id="examples-of-reinforcement-learning" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-reinforcement-learning">Examples of Reinforcement Learning</h2>
+<ul>
+<li>Make a humanoid robot walk</li>
+<li>Train an LLM using human feedback</li>
+<li>Control a power station</li>
+<li>Optimise operating system routines</li>
+<li>Manage an inverstment portfolio</li>
+<li>Control inventory in a warehouse</li>
+</ul>
+</section>
+<section id="example-make-a-humanoid-robot-walk" class="level2">
+<h2 class="anchored" data-anchor-id="example-make-a-humanoid-robot-walk">Example: Make a humanoid robot walk</h2>
+<div class="quarto-video"><iframe data-external="1" src="https://www.youtube.com/embed/I44_zbEwz_w" width="90%" height="65%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Atlas demonstrates policies using RL based on human motion capture and animation-Boston Dynamics ’25</p>
+</section>
+<section id="example-train-an-llm-using-human-feedback" class="level2">
+<h2 class="anchored" data-anchor-id="example-train-an-llm-using-human-feedback">Example: Train an LLM using human feedback</h2>
+<div class="quarto-video"><iframe data-external="1" src="https://www.youtube.com/embed/VPRSBzXzavo?start=442" width="80%" height="60%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><span style="color:blue">Proximal policy update (PPO)</span> is used in training pipeline of ChatGPT. <span style="color:blue">Group relative policy optimisation (GRPO)</span> is used in DeepSeek (<em>Ari Seff, watch from 7:22</em>).</p>
+</section>
+<section id="example-control-a-power-station" class="level2">
+<h2 class="anchored" data-anchor-id="example-control-a-power-station">Example: Control a power station</h2>
+<div class="quarto-video"><iframe data-external="1" src="https://www.youtube.com/embed/Oesjkp5tSkA" width="100%" height="80%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="example-optimising-operating-system-routines" class="level2">
+<h2 class="anchored" data-anchor-id="example-optimising-operating-system-routines">Example: Optimising operating system routines</h2>
+<p>2023, Daniel J. Mankowitz, et al.&nbsp;Faster sorting algorithms discovered using deep reinforcement learning, <em>Nature</em>, Vol 618, pp.&nbsp;257-273</p>
+<p>DeepMind’s <span style="color:blue">AlphaDev</span>, a deep reinforcement learning agent, has discovered faster sorting algorithms, outperforming previously known human benchmarks.</p>
+<ul>
+<li>These algorithms have been integrated into the LLVM standard C++ sort library.</li>
+</ul>
+</section>
+<section id="example-control-inventory-in-a-warehouse" class="level2">
+<h2 class="anchored" data-anchor-id="example-control-inventory-in-a-warehouse">Example: Control inventory in a warehouse</h2>
+<p>Respond to the demand for different products stocked in a warehouse over time.</p>
+<p>Goals:</p>
+<ul>
+<li>Order the necessary goods to meet demand</li>
+<li>Avoid running out of stock (stock-outs)</li>
+<li>Respond to seasonal demand</li>
+<li>Dynamically respond to changing trends and fashions</li>
+</ul>
+</section>
+<section id="rewards" class="level1">
+<h1>Rewards</h1>
+<section id="rewards-1" class="level2">
+<h2 class="anchored" data-anchor-id="rewards-1">Rewards</h2>
+<ul>
+<li>A <span style="color:blue">reward</span> <span class="math inline">\(R_t\)</span> is a scalar feedback signal.</li>
+<li>Indicates how well agent is doing at step <span class="math inline">\(t\)</span></li>
+<li>The agent’s job is to maximise cumulative reward</li>
+</ul>
+<p>Reinforcement learning is based on the <span style="color:blue">reward hypothesis</span></p>
+<p><strong>Definition (Reward Hypothesis):</strong><br>
+<em>All</em> goals can be described by the maximisation of expected cumulative reward.</p>
+</section>
+<section id="example-of-rewards" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-rewards">Example of Rewards</h2>
+<ul>
+<li>Make a humanoid robot walk
+<ul>
+<li>-ve reward for falling</li>
+<li>+ve reward for forward motion</li>
+</ul></li>
+<li>Optimise operating system routines
+<ul>
+<li>-ve reward for execution time</li>
+<li>+ve reward for throughput</li>
+</ul></li>
+</ul>
+<hr>
+<ul>
+<li>Control a power station
+<ul>
+<li>+ve reward for containment of plasma</li>
+<li>-ve reward for plasma crashing</li>
+</ul></li>
+<li>Control inventory in a warehouses
+<ul>
+<li>-ve reward for stock-out penalty (lost sales)</li>
+<li>-ve reward for holding costs (inventory)</li>
+<li>+ve reward for sales revenue</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="sequential-decision-making" class="level1">
+<h1>Sequential Decision Making</h1>
+<section id="sequential-decision-making-1" class="level2">
+<h2 class="anchored" data-anchor-id="sequential-decision-making-1">Sequential Decision Making</h2>
+<p>Goal: <em>select actions to maximise total future reward</em></p>
+<ul>
+<li><p>Actions may have long term consequences</p></li>
+<li><p>Reward may be delayed</p></li>
+<li><p>It may be better to sacrifice immediate reward to gain more long-term reward</p></li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li><p>A financial investment (may take months to mature)</p></li>
+<li><p>Re-stocking warehouse (might prevent a stock-outs in days or weeks)</p></li>
+</ul>
+</section>
+<section id="agent" class="level2">
+<h2 class="anchored" data-anchor-id="agent">Agent</h2>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/agent_and_environment_1d.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</section>
+<section id="agent-and-environment" class="level2">
+<h2 class="anchored" data-anchor-id="agent-and-environment">Agent and Environment</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/agent_and_environment_2d.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>At each step <span class="math inline">\(t\)</span> the agent:</p>
+<ul>
+<li><p>Executes action <span class="math inline">\(A_t\)</span></p></li>
+<li><p>Receives observation <span class="math inline">\(O_t\)</span></p></li>
+<li><p>Receives scalar reward <span class="math inline">\(R_t\)</span></p></li>
+</ul>
+<p>The environment:</p>
+<p>Receives action <span class="math inline">\(A_t\)</span></p>
+<ul>
+<li><p>Emits observation <span class="math inline">\(O_{t+1}\)</span></p></li>
+<li><p>Emits scalar reward <span class="math inline">\(R_{t+1}\)</span></p></li>
+<li><p><span class="math inline">\(t\)</span> increments at env. step</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="history-and-state" class="level2">
+<h2 class="anchored" data-anchor-id="history-and-state">History and State</h2>
+<p>The <span style="color:blue">history</span> is sequence of observations, actions, rewards</p>
+<p><span class="math display">\[
+H_t = O_1,R_1,A_1, \ldots A_{t-1}, O_t, R_t
+\]</span> - i.e.&nbsp;the stream of a robot’s actions, observations and rewards up to time <span class="math inline">\(t\)</span></p>
+<p>What happens next depends on the history:</p>
+<ul>
+<li>The agent selects actions, and</li>
+<li>the environment selects observations/rewards.</li>
+</ul>
+<p><span style="color:blue">State</span> is the information used to determine what happens next.</p>
+<p>Formally, a <span style="color:blue">state</span> is a function of the history: <span class="math inline">\(S_t = f(H_t )\)</span></p>
+</section>
+<section id="environment-state" class="level2">
+<h2 class="anchored" data-anchor-id="environment-state">Environment State</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/agent_and_environment_3c.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>The <span style="color:blue">environment state</span> <span class="math inline">\(S^e_t\)</span> is the environment’s private representation</p>
+<ul>
+<li>i.e.&nbsp;data environment uses to pick the next observation/reward</li>
+</ul>
+<p>The environment state is not usually visible to the agent</p>
+<ul>
+<li>Even if <span class="math inline">\(S^e_t\)</span> is visible, it may contain irrelevant info</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="agent-state" class="level2">
+<h2 class="anchored" data-anchor-id="agent-state">Agent State</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/agent_and_environment_4d.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>The <span style="color:blue">agent state</span> <span class="math inline">\(S^a_t\)</span> is the agent’s internal representation</p>
+<ul>
+<li><p>i.e.&nbsp;information the agent uses to pick the next action</p></li>
+<li><p>i.e.&nbsp;information used by reinforcement learning algorithms</p></li>
+</ul>
+<p>It can be any function of history: <span class="math inline">\(S^a_t = f(H_t)\)</span></p>
+</div>
+</div>
+</section>
+<section id="information-state" class="level2">
+<h2 class="anchored" data-anchor-id="information-state">Information State</h2>
+<p>An <span style="color:blue">information state</span> (a.k.a. <span style="color:blue">Markov</span> state) contains all useful information from the history.</p>
+<p><strong>Definition:</strong> A state <span class="math inline">\(S_t\)</span> is <span style="color:blue">Markov</span> if and only if <span class="math display">\[
+\mathbb{P} [S_{t+1} | St ] = \mathbb{P} [S_{t+1} | S_1, \ldots, S_t ]
+\]</span> “The future is independent of the past given the present” <span class="math display">\[
+H_{1:t} \rightarrow St \rightarrow H_{t+1:\infty}
+\]</span></p>
+<hr>
+<p>Once the state is known, the history may be thrown away</p>
+<ul>
+<li><p>i.e.&nbsp;The state is a sufficient statistic of the future</p></li>
+<li><p>The environment state <span class="math inline">\(S^e_t\)</span> is Markov</p></li>
+<li><p>The history <span class="math inline">\(H_t\)</span> is Markov</p></li>
+</ul>
+</section>
+<section id="rat-example" class="level2">
+<h2 class="anchored" data-anchor-id="rat-example">Rat Example</h2>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/rat2.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<div class="incremental">
+<ul class="incremental">
+<li><p>What if agent state = last <span class="math inline">\(3\)</span> items in sequence?</p></li>
+<li><p>What if agent state = counts for lights, bells and levers?</p></li>
+<li><p>What if agent state = complete sequence?</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="components-of-an-rl-agent" class="level1">
+<h1>Components of an RL Agent</h1>
+<section id="components-of-an-rl-agent-1" class="level2">
+<h2 class="anchored" data-anchor-id="components-of-an-rl-agent-1">Components of an RL Agent</h2>
+<p>An RL agent may include <em>one or more</em> of these components:</p>
+<ul>
+<li><p>Policy: agent’s behaviour function</p></li>
+<li><p>Value function: how good is each state and/or action</p></li>
+<li><p>Model: agent’s representation of the environment</p></li>
+</ul>
+</section>
+<section id="policy" class="level2">
+<h2 class="anchored" data-anchor-id="policy">Policy</h2>
+<p>A <span style="color:blue">policy</span> is the agent’s behaviour</p>
+<p>It is a map from state to action, e.g.</p>
+<ul>
+<li><p>Deterministic policy: <span class="math inline">\(a = \pi(s)\)</span></p></li>
+<li><p>Stochastic policy: <span class="math inline">\(\pi(a|s) = \mathbb{P}[A_t = a|S_t = s]\)</span></p></li>
+</ul>
+</section>
+<section id="value-function" class="level2">
+<h2 class="anchored" data-anchor-id="value-function">Value Function</h2>
+<p><span style="colorblue">Value function</span> is a prediction of future reward</p>
+<ul>
+<li><p>Used to evaluate the goodness/badness of states,</p></li>
+<li><p>and therefore to select between actions, e.g.</p></li>
+</ul>
+<p><span class="math display">\[
+v_{\pi}(s) = \mathbb{E}[R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \ldots | S_t = s]
+\]</span></p>
+</section>
+<section id="model" class="level2">
+<h2 class="anchored" data-anchor-id="model">Model</h2>
+<p>A <span style="color:blue">model</span> predicts what the environment will do next</p>
+<p><span class="math inline">\(\mathcal{P}\)</span> predicts the next state</p>
+<p><span class="math inline">\(\mathcal{R}\)</span> predicts the next (immediate) reward, e.g.</p>
+<p><span class="math display">\[
+P^a_{ss'} = \mathbb{P}[S_{t+1} = s' | S_t = s, A_t = a]
+\]</span></p>
+<p><span class="math display">\[
+R^a_s = \mathbb{E}[R_{t+1} | S_t = s, A_t = a]
+\]</span></p>
+</section>
+<section id="maze-example" class="level2">
+<h2 class="anchored" data-anchor-id="maze-example">Maze Example</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/maze_1c.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Rewards: -1 per time-step</li>
+<li>Actions: N, E, S, W</li>
+<li>States: Agent’s location</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="maze-example-policy" class="level2">
+<h2 class="anchored" data-anchor-id="maze-example-policy">Maze Example: Policy</h2>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/maze_2c.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+<ul>
+<li>Arrows represent policy <span class="math inline">\(\pi(s)\)</span> for each state <span class="math inline">\(s\)</span></li>
+</ul>
+</section>
+<section id="maze-example-value-function" class="level2">
+<h2 class="anchored" data-anchor-id="maze-example-value-function">Maze Example: Value Function</h2>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/maze_3c.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+<ul>
+<li>Numbers represent value <span class="math inline">\(v_{\pi}(s)\)</span> of each state <span class="math inline">\(s\)</span></li>
+</ul>
+</section>
+<section id="maze-example-model" class="level2">
+<h2 class="anchored" data-anchor-id="maze-example-model">Maze Example: Model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/maze_4c.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Agent may have an internal model of the environment</p>
+<ul>
+<li><p>Dynamics: how actions change the state</p></li>
+<li><p>Rewards: how much reward from each state</p></li>
+<li><p>The model may be imperfect</p></li>
+</ul>
+</div>
+</div>
+<p>Grid layout represents transition model <span class="math inline">\(\mathcal{P}^a_{ss'}\)</span></p>
+<p>Numbers represent immediate reward <span class="math inline">\(\mathcal{R}^a_s\)</span> from each state <span class="math inline">\(s\)</span> (same for all <span class="math inline">\(a\)</span>)</p>
+</section>
+</section>
+<section id="categorizing-rl-agents" class="level1">
+<h1>Categorizing RL agents</h1>
+<section id="categorizing-rl-agents-1" class="level2">
+<h2 class="anchored" data-anchor-id="categorizing-rl-agents-1">Categorizing RL agents</h2>
+<p>Value Based</p>
+<ul>
+<li><p><span style="color:lightgrey">No Policy (Implicit)</span></p></li>
+<li><p>Value Function</p></li>
+</ul>
+<p>Policy Based</p>
+<ul>
+<li><p>Policy</p></li>
+<li><p><span style="color:lightgrey">No Value Function</span></p></li>
+</ul>
+<p>Actor Critic</p>
+<ul>
+<li>Policy</li>
+<li>Value Function</li>
+</ul>
+<hr>
+<p>Model Free</p>
+<ul>
+<li><p>Policy and/or Value Function</p></li>
+<li><p><span style="color:lightgrey">No Model</span></p></li>
+</ul>
+<p>Model Based</p>
+<ul>
+<li><p>Policy and/or Value Function</p></li>
+<li><p>Model</p></li>
+</ul>
+</section>
+<section id="taxonomy" class="level2">
+<h2 class="anchored" data-anchor-id="taxonomy">Taxonomy</h2>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figs/taxonomy_b.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</section>
+<section id="exploration-and-exploitation" class="level2">
+<h2 class="anchored" data-anchor-id="exploration-and-exploitation">Exploration and Exploitation</h2>
+<ul>
+<li><p>Reinforcement learning is like trial-and-error learning</p></li>
+<li><p>The agent should discover a good policy</p></li>
+<li><p>From its experiences of the environment</p></li>
+<li><p>Without losing too much reward along the way</p></li>
+</ul>
+<hr>
+<ul>
+<li><p><em>Exploration</em> finds more information about the environment</p></li>
+<li><p><em>Exploitation</em> exploits known information to maximise reward</p></li>
+<li><p>It is usually important to explore as well as exploit</p></li>
+</ul>
+</section>
+<section id="examples" class="level2">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
+<ul>
+<li><p>Restaurant Selection<br> <span style="color:blue">Exploitation</span> Go to your favourite restaurant<br> <span style="color:blue">Exploration</span> Try a new restaurant</p></li>
+<li><p>Online Banner Advertisements<br> <span style="color:blue">Exploitation</span> Show the most successful advert<br> <span style="color:blue">Exploration</span> Show a different advert</p></li>
+<li><p>Gold exploration<br> <span style="color:blue">Exploitation</span> Drill at the best known location<br> <span style="color:blue">Exploration</span> Drill at a new location</p></li>
+<li><p>Game Playing<br> <span style="color:blue">Exploitation</span> Play the move you believe is best<br> <span style="color:blue">Exploration</span> Play an experimental move</p></li>
+</ul>
+</section>
+<section id="prediction-and-control" class="level2">
+<h2 class="anchored" data-anchor-id="prediction-and-control">Prediction and Control</h2>
+<p>Prediction: evaluate the future</p>
+<ul>
+<li>Given a best policy</li>
+</ul>
+<p>Control: optimise the future</p>
+<ul>
+<li>find the best policy</li>
+</ul>
+<p>We need to solve the prediction problem in order to solve the control problem</p>
+<ul>
+<li>i.e.&nbsp;we need evaluate all of our polcies in order to work out which is the best one</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./mdp.html" class="pagination-link" aria-label="Introduction to MDPs">
+        <span class="nav-page-text"><span class="chapter-title">Introduction to MDPs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
